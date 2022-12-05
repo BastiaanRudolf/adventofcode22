@@ -9,14 +9,7 @@ def clean_crate(lst):
 
 
 def get_starting_stack(lines):
-    stack = []
-    for line in lines:
-        line = line.replace('\n', '')
-        for i in range(0, len(line), 4):
-            stack.append(line[i:i+4])
-    starting_stack = [clean_crate(stack[x::9]) for x in range(9)]
-    starting_stack = [list(reversed(lst)) for lst in starting_stack]
-    return starting_stack
+    return [list(reversed(lst)) for lst in [clean_crate([line[i:i+4] for line in lines for i in range(0, len(line), 4)][x::9]) for x in range(9)]]
 
 
 def perform_operations(starting_stack, operations, machine):
